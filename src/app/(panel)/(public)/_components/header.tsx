@@ -15,11 +15,16 @@ import {
 } from "@/components/ui/sheet"
 // Importa o componente Button da biblioteca de UI para criar botões estilizados.
 import { Button } from "@/components/ui/button"
-// Importa o ícone Menu da biblioteca Lucide React para usar como ícone do menu lateral.
+
+// Importa o ícones da biblioteca Lucide React.
 import { Menu } from "lucide-react"
+import { LogIn } from "lucide-react"
 
 export function Header(){
     const [isOpen, setIsOpen] = useState(false);
+    
+    // Sinaliza que não existe usuário logado.
+    const session = null;
 
     const navItems = [
         { href: "#profissionais", label: "Profissionais" }
@@ -62,12 +67,27 @@ export function Header(){
                 >
                     {/* 'Link' é um componente do Next.js que permite navegar entre páginas
                     e item.labbel é o texto que será exibido no link */}
-                    <Link href={item.href}>
+                    <Link href={item.href} className='text-base'>
                     {item.label}
                     </Link>
 
             </Button>
             ))}
+            
+            {/* confere se existe login ativo, caso não, renderiza o botão login na tela do painel*/}
+            {session ? (
+                <Link
+                href="/dashboard"
+                className='flex items-center justify-center gap-2'
+                >
+                Painel da clinica
+                </Link>
+            ) : (
+                <Button>
+                    <LogIn/>
+                    Portal da clínica
+                </Button>
+            )}
         </>
     )
 
