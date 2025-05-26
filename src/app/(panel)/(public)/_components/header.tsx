@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 
 export function Header(){
-    const [isOpen, setIsOpen] = userState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
         { href: "#profissionais", label: "Profissionais" }
@@ -87,7 +87,7 @@ export function Header(){
                 A classe "hidden md:flex" faz com que esse menu só apareça em telas médias ou maiores (por exemplo, desktops e tablets).
                 Em telas pequenas (como celulares), o menu fica escondido e será substituído pelo menu lateral (hambúrguer).
                 O link "Profissionais" é um exemplo de item do menu, que pode levar para uma página de profissionais cadastrados. */}
-                <nav className="hidden md:flex items-center">
+                <nav className="hidden md:flex items-center space-x-4">
 
                     {/* O Navlinks renderiza os links de navegação, que já foram definidos acima. */}
                     <NavLinks/>
@@ -113,8 +113,9 @@ export function Header(){
                         <SheetDescription>
                             Veja nossos links
                         </SheetDescription>
+                        {/* esse className é para dar um espaçamento entre o titulo e os links */}
+                        <nav className='flex flex-col space-y-4 mt-6'>
                         {/* Aqui estão os links do menu lateral, que aparecem quando o botão de menu lateral (hambúrguer) é clicado. */}
-                        <nav>
                             <NavLinks/>
                         </nav>
 
