@@ -1,7 +1,7 @@
 // use client é uma diretiva do Next.js que indica que este componente deve ser renderizado no lado do cliente, permitindo o uso de hooks como useState.
 "use client"
 // Importa o React e outros componentes necessários para criar o cabeçalho do site.
-import { userState } from 'react';
+import { useState } from 'react';
 // Importa o Link do Next.js para criar links de navegação entre páginas.
 import Link from 'next/link';
 // Importa componentes de UI personalizados, como Sheet e Button, para criar um menu lateral responsivo.
@@ -45,6 +45,9 @@ export function Header(){
         {navItems.map((item) => (
             // É um componente de botão que é vindo da biblioteca de UI
             <Button
+                // sinaliza para voltar ao estado de false/fechado do menu de hambúrguer
+                // quando o botão é clicado, ou seja, fecha o menu lateral ao clicar em um link
+                onClick={() => setIsOpen(false)}
                 // 'key' é pra quando quando renderiza uma lista de itens, o React precisa de uma 
                 // 'key' única para cada item para poder identificá-los e atualizá-los
                 // eficientemente se a lista mudar.
