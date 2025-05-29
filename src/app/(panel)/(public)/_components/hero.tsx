@@ -31,7 +31,7 @@ export function Hero() {
     - xl: 1280px ou mais.
     - 2xl: 1536px ou mais.
   */}
-      <div className="container mx-auto px-4 pt-20 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 pt-20 pb-4 sm:pb-0 sm:px-6 lg:px-8">
 
         <main className="flex items-center justify-center">
           {/* max-w-3x1 delimita pra área do article space-y-8 → Adiciona 
