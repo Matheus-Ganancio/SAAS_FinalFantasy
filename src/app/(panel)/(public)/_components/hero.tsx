@@ -6,7 +6,7 @@ import Image from "next/image";
 export function Hero() {
   return (
     // Aqui é onde o Hero é estilizado utilizando o Tailwind CSS.
-    <section className="bg-white">
+    <section className="bg-[#152238]">
           {/* 
      container → Controla o tamanho máximo do elemento e ajusta automaticamente
      mx-auto → Centraliza horizontalmente qualquer elemento dentro dele que tenha
@@ -39,17 +39,17 @@ export function Hero() {
             <article className="flex-[2] max-w-3xl Space-y-8 flex flex-col jus">
               {/* Define o tamanho do texto normal e o tamanho em tela grande, também
               deixa em negrito */}
-                <h1 className="text-4xl lg:text-5xl font-bold max-w-2xl tracking-tighter">
+                <h1 className="text-[#33FFDD] text-4xl lg:text-5xl font-bold max-w-2xl tracking-tighter mb-4 [text-indent:0.5em]">
                     Aqui você encontra todos os tipos de mercadores! para o que precisa!!
                 </h1>
-                <p>
-                    Somos a <b>CENTAURIO</b>, e essa é a nossa plataforma, a Ivalice Bazaar, Aqui conectamos você com mercadores de Ivalice e também Eorzea (Somos uma organização apenas auxilia no intermediário entre você e os mercadores, <b>não somos responsáveis por nenhum produto ou serviço oferecido por eles</b>).
+                <p className="text-white [text-indent:1em]">
+                    A <i><b>CENTAURIO</b></i> apresenta a <i><b>Ivalice Bazaar</b></i>, sua ponte para mercadores de Ivalice e Eorzea. Facilitamos o contato, mas lembre-se: <u><b>não somos responsáveis por nenhum produto ou serviço oferecido por eles</b></u>..
                 </p>
 
                 {/* Aqui adicionei o mt-4 pra dar um espaçamento entre o texto e o botão
                 mt significa margin-top */}
-                <Button className="bg-emerald-500 hover:bg-emerald-400 w-fit px-6 font-semibold mt-4">
-                    Mercadores
+                <Button className="bg-[#FF4B33] hover:bg-[#1E90FF] text-[#F5F5F5] w-fit px-6 font-semibold mt-4">
+                    Conheça nossos planos
                 </Button>
             </article>
 
@@ -58,8 +58,8 @@ export function Hero() {
               {/* Chama a imagem importando da pasta public raiz do projeto
               e dá uma alternativa pra caso a imagem não carregue */}
             <Image 
-              src="/doctor-hero.png"
-              alt="Foto ilustrativa de um profissional da saúde"
+              src="/people/Sphene_Banner.png"
+              alt="Foto ilustrativa da representante Sphene"
               width={340}
               height={400}
               className="object-contain"
