@@ -4,7 +4,7 @@ import { Professionals } from './_components/professionals';
 
 export default function Home() {
   return (
-    // Controla o layout layouts
+    // Controla o layout da página, garantindo que o Header fique no topo
     <div className="flex flex-col min-h-screen">
       <Header />
 

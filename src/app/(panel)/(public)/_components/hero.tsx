@@ -40,16 +40,16 @@ export function Hero() {
               {/* Define o tamanho do texto normal e o tamanho em tela grande, também
               deixa em negrito */}
                 <h1 className="text-4xl lg:text-5xl font-bold max-w-2xl tracking-tighter">
-                    Encontre os melhores profissionais em um único local!
+                    Aqui você encontra todos os tipos de mercadores! para o que precisa!!
                 </h1>
                 <p>
-                    Nós somos uma plataforma para profissionais da sáude com foco em agilizar seu atendimento de forma simplificada e organizada.
+                    Somos a <b>CENTAURIO</b>, e essa é a nossa plataforma, a Ivalice Bazaar, Aqui conectamos você com mercadores de Ivalice e também Eorzea (Somos uma organização apenas auxilia no intermediário entre você e os mercadores, <b>não somos responsáveis por nenhum produto ou serviço oferecido por eles</b>).
                 </p>
 
                 {/* Aqui adicionei o mt-4 pra dar um espaçamento entre o texto e o botão
                 mt significa margin-top */}
                 <Button className="bg-emerald-500 hover:bg-emerald-400 w-fit px-6 font-semibold mt-4">
-                    Profissionais disponíveis
+                    Mercadores
                 </Button>
             </article>
 

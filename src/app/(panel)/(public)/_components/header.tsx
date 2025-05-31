@@ -63,7 +63,7 @@ export function Header(){
                 asChild
                 // 'className' define o estilo do botão, no caso está sendo removido o fundo e a sombra
                 // também definindo a cor do texto
-                className="bg-transparent hover:bg-transparent text-black shadow-none"
+                className="bg-transparent hover:bg-transparent text-[#FF4B33] hover:text-[#1E90FF] shadow-none"
                 >
                     {/* 'Link' é um componente do Next.js que permite navegar entre páginas
                     e item.labbel é o texto que será exibido no link */}
@@ -83,9 +83,9 @@ export function Header(){
                 Painel da clinica
                 </Link>
             ) : (
-                <Button>
+                <Button className="text-[#000000] hover:text-[#C6A94D] bg-[#C6A94D] hover:bg-[#000000]">
                     <LogIn/>
-                    Portal da clínica
+                    Portal
                 </Button>
             )}
         </>
@@ -96,11 +96,11 @@ export function Header(){
         // Coloca a Logo "OdontoPro" com "Odonto" em negrito e "PRO" em verde
         // e esse logo é um texto e não uma imagem, ele também é um link
         // clicavel
-        className ="fixed top-0 right-0 left-0 z-[999] py-4 px-6 bg-white">
+        className ="fixed top-0 right-0 left-0 z-[999] py-4 px-6 bg-[#060b10]">
             <div className="container mx-auto flex items-center justify-between">
                 <Link href="/"
-                className="text-3xl font-bold text-zinc-900">
-                OdontoPro<span className="text-emerald-500">PRO</span>
+                className="text-3xl font-bold text-[#C0C0C0]">
+                Ivalice<span className="text-[#C6A94D]">BAZAAR</span>
                 </Link>
                 
                 {/* Menu de navegação principal do site.
@@ -117,7 +117,7 @@ export function Header(){
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         {/* Botão de menu lateral (hambúrguer) que aparece em telas pequenas. */}
                     <SheetTrigger asChild className="md:hidden">
-                        <Button className="text-black hover:bg-transparent"
+                        <Button className="text-[#33FFDD] hover:text-[#C0C0C0] hover:bg-transparent"
                         variant="ghost"
                         size="icon">
                             <Menu className="w-6 h-6" />
@@ -125,12 +125,15 @@ export function Header(){
                     </SheetTrigger>
 
                     {/* controla o tamanho de quando é um dispositivo menor w-[px] e maior sm:w-[300px] e faz o eixo z na pagina em z-[xxxx]*/}
-                    <SheetContent side="right" className="w-[240px] sm:w-[300px] z-[9999]">
-                        <SheetTitle>Menu</SheetTitle>
+                    <SheetContent side="right" className="w-[240px] sm:w-[300px] z-[9999] bg-[#35383D]">
+                        
+                        <SheetTitle className="text-[#33FFDD] ">
+                            Menu
+                            </SheetTitle>
                         <SheetHeader></SheetHeader>
 
                         {/* Descrição da da rotução do menu (como um titulo do menu), no caso os links são em referencia ao conteudo abaixo dele */}
-                        <SheetDescription>
+                        <SheetDescription className="text-[#F5F5F5] font-semibold">
                             Veja nossos links
                         </SheetDescription>
                         {/* esse className é para dar um espaçamento entre o titulo e os links */}
