@@ -1,10 +1,10 @@
 
 export default function Dashboard() {
     return (
-        <div>
+        <section>
             <h1>
                 Pagina Dashboard
             </h1>
-        </div>
+        </section>
     )
 }
