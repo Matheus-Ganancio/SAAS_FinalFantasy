@@ -1,15 +1,16 @@
 
+import { SidebarDashboard } from "./_components/sidebar";
+
 export default function DashboardLayout({
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
     return (
-        <section>
-            <h1>
-                Dashboard Layout
-            </h1>
-            {children}
-        </section>
+        <>
+        <SidebarDashboard>
+        {children}
+            </SidebarDashboard>
+            </>
     )
 }
