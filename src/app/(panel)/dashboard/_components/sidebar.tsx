@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import {
@@ -12,7 +12,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button";
-import { List } from 'lucide-react';
+import { CalendarCheck2, Folder, Banknote, UserPen, List } from 'lucide-react';
+import Link from 'next/link';
+import { Span } from 'next/dist/trace';
 
 export function SidebarDashboard({ children}: { children: React.ReactNode}) {
 
@@ -29,9 +31,10 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
                 }
             )}>
                 {/*Configuração da sidebar, fica oculta (md:hidden) em tela menor que 768px, ou seja
-                quando não está em mobile.
+                quando não está em mobile. sticky é o position do css
                 */}
-                <header className='md:hidden'>
+                <header className='md:hidden flex items-center justify-between border-b
+                px-x md:px-6 h-14 z-10 sticky top-0 bg-white'>
                     <Sheet>
                         <div className='flex items-center gap-4'>
                             <SheetTrigger asChild>
@@ -44,6 +47,53 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
                                 Menu Ivalice Bazaar
                             </h1>
                         </div>
+
+                    <SheetContent side="right" className='sm:max-w-xs text-black'>
+                        <SheetTitle>
+                            Ivalice Bazaar
+                        </SheetTitle>
+                        <SheetDescription>
+                            Menu de navegação
+                        </SheetDescription>
+
+                        <nav className='grid gap-2 text-base pt-5'>
+                            <SidebarLink
+                            href="/dashboard"
+                            label="Agendamentos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<CalendarCheck2 className='w-6 h-6' />}
+                            />
+
+                            <SidebarLink
+                            href="/dashboard/services"
+                            label="Serviços"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Folder className='w-6 h-6' />}
+                            />
+
+                            <SidebarLink
+                            href="/dashboard/profile"
+                            label="Perfil"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<UserPen className='w-6 h-6' />}
+                            />
+
+
+
+                            <SidebarLink
+                            href="/dashboard/plans"
+                            label="Planos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Banknote className='w-6 h-6' />}
+                            />
+
+                        </nav>
+                    </SheetContent>
+
                     </Sheet>
                 </header>
 
@@ -53,5 +103,33 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
 
             </div>
         </div>
+    )
+}
+
+// Componentes da sidebar
+interface SidebarLinkProps {
+    href: string;
+    icon: React.ReactNode;
+    label: string;
+    pathname: string;
+    isCollapsed: boolean;
+}
+
+// Utilização dos componentes da sidebar já criados
+function SidebarLink({ href, icon, isCollapsed, label, pathname}: SidebarLinkProps) {
+    return(
+        <Link
+        href={href}
+        >
+            {/* Confere se a pagina que vc está é igual a que vc quer navegar, quer dizer que
+            você está nela, então faz os ajustes da interface baseado nisso*/}
+            <div className={clsx("flex items-center gap-2px-3 py-2 rounded-md transition-colors", {"text-white bg-blue-500": pathname === href,
+                "text-gray-700 hover:bg-gray-100": pathname !== href,
+
+            })}>
+                <span className='w-6 h-6'>{icon}</span>
+                {!isCollapsed && <span>{label}</span>}
+            </div>
+        </Link>
     )
 }
