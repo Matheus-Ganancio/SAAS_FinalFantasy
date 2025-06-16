@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 // Lembrar também de adicionar import de imagem aqui caso estejam fora da pasta
 // public raiz do projeto
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -56,7 +56,8 @@ export function Hero() {
             {/* Faz com que a imagem seja exibida apenas em telas grandes (lg) */}
             <div className="hidden lg:block">
               {/* Chama a imagem importando da pasta public raiz do projeto
-              e dá uma alternativa pra caso a imagem não carregue */}
+              e dá uma alternativa pra caso a imagem não carregue.
+              IMPORTANTE: sempre coloque as dimensões da imagem para evitar problemas */}
             <Image 
               src="/people/Sphene_Banner.png"
               alt="Foto ilustrativa da representante Sphene"

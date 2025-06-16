@@ -1,4 +1,6 @@
 "use client";
+{ /* funcionamentos da estrutura explicados dentro de "hero.tsx", pois muito dessa pagina
+    implementei primeiro em "hero.tsx" */}
 
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -12,9 +14,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button";
-import { CalendarCheck2, Folder, Banknote, UserPen, List } from 'lucide-react';
+import { CalendarCheck2, ChevronLeft, ChevronRight, Folder, Banknote, UserPen, List } from 'lucide-react';
 import Link from 'next/link';
 import { Span } from 'next/dist/trace';
+import Image from 'next/image';
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 
 export function SidebarDashboard({ children}: { children: React.ReactNode}) {
 
@@ -24,12 +28,97 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
     // Configura o collapse da sidebar
     return (
         <div className='flex min-h-screen w-full'>
+                    <aside className={clsx("flex flex-col border-r bg-[#83127b] transition-all duration-300 p-4 h-full", {
+                        "w-20": isCollapsed,
+                        "w-64": !isCollapsed,
+                        "hidden md:flex md:fixed": true,
+                    })}>
+
+                        <div className='mb-6 mt-4'>
+                            {/* Imagem do logo, só vai aparecer se o sidebar não estiver
+                            colapsado */}
+                            {!isCollapsed && 
+                            (
+                            // Funcionamento explicado dentro do "hero.tsx"
+                            <Image
+                            src="/logo/Ivalice_Bazaar_Logo.png"
+                            alt="Logo Ivalice Bazaar"
+                            width={340}
+                            height={400}
+                            className="object-contain"
+                            quality={100}
+                            priority={true}
+                            />
+                            )}
+                        </div>
+
+                        {/* self-end ajusta o alinhamento dentro do display flex, no caso desse código, é o <aside> */}
+                        <Button className='bg-[#C6A94D] hover-[#FFFFFF] text-[#000000] hover:text-[#C6A94D] self-end mb-2'
+                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        >
+                            {/* Ícone de collapse, aponta pra esquerda caso esteja true, se for false ele aponta pra direita */}
+                            {!isCollapsed ? <ChevronLeft className='w-12 h-12'/> : 
+                            <ChevronRight className='w-12 h-12'/>}
+                        </Button>
+
+                        <Collapsible open={!isCollapsed}>
+                        {/* Aqui dentro nós inserimos as categorias da sidebar */}
+                            <CollapsibleContent>
+                                <nav className='flex flex-col gap-1 overflow-hidden'>
+                                    <span className='text-sm text-gray-400 font-medium mt-1 uppercase'>
+                                        Painel
+                                    </span>
+                            <SidebarLink
+                            href="/dashboard/services"
+                            label="Serviços"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Folder className='w-6 h-6' />}
+                            />
+
+                            <SidebarLink
+                            href="/dashboard"
+                            label="Agendamentos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<CalendarCheck2 className='w-6 h-6' />}
+                            />
+
+                                    <span className='text-sm text-gray-400 font-medium mt-1 uppercase'>
+                                        Configurações
+                                    </span>
+                            <SidebarLink
+                            href="/dashboard/profile"
+                            label="Perfil"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<UserPen className='w-6 h-6' />}
+                            />
+
+
+
+                            <SidebarLink
+                            href="/dashboard/plans"
+                            label="Planos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Banknote className='w-6 h-6' />}
+                            />
+
+                                </nav>
+                            </CollapsibleContent>
+                        </Collapsible>
+
+                    </aside>
+
             <div className={clsx("flex flex-1 flex-col transition-all duration-300",
                 {
                     "md:ml-20": isCollapsed, 
                     "md:ml-64": !isCollapsed,
                 }
             )}>
+
+
                 {/*Configuração da sidebar, fica oculta (md:hidden) em tela menor que 768px, ou seja
                 quando não está em mobile. sticky é o position do css
                 */}

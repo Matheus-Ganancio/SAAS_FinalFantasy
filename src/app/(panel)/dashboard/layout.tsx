@@ -7,10 +7,12 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
+        <div className='bg-[#33415C]'>
         <>
         <SidebarDashboard>
         {children}
             </SidebarDashboard>
             </>
+            </div>
     )
 }
