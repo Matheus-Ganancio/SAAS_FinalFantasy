@@ -28,7 +28,7 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
     // Configura o collapse da sidebar
     return (
         <div className='flex min-h-screen w-full'>
-                    <aside className={clsx("flex flex-col border-r bg-[#83127b] transition-all duration-300 p-4 h-full", {
+                    <aside className={clsx("flex flex-col border-r bg-[#152238] transition-all duration-300 p-4 h-full", {
                         "w-20": isCollapsed,
                         "w-64": !isCollapsed,
                         "hidden md:flex md:fixed": true,
@@ -41,7 +41,7 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
                             (
                             // Funcionamento explicado dentro do "hero.tsx"
                             <Image
-                            src="/logo/Ivalice_Bazaar_Logo.png"
+                            src="/logo/IvaliceBazaar_Logo.png"
                             alt="Logo Ivalice Bazaar"
                             width={340}
                             height={400}
