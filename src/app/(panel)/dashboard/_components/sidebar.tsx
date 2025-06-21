@@ -61,6 +61,47 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
                             <ChevronRight className='w-12 h-12'/>}
                         </Button>
 
+                        {/* Mostrar apenas quando a sidebar estiver colapsada */}
+
+                        {isCollapsed && (
+                            <nav classNanme='flex flex-col gap-1 overflow-hidden mt-2'>
+                                                            <SidebarLink
+                            href="/dashboard/services"
+                            label="Serviços"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Folder className='w-6 h-6' />}
+                            />
+
+                            <SidebarLink
+                            href="/dashboard"
+                            label="Agendamentos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<CalendarCheck2 className='w-6 h-6' />}
+                            />
+
+                                                        <SidebarLink
+                            href="/dashboard/profile"
+                            label="Perfil"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<UserPen className='w-6 h-6' />}
+                            />
+
+
+
+                            <SidebarLink
+                            href="/dashboard/plans"
+                            label="Planos"
+                            pathname={pathname}
+                            isCollapsed={isCollapsed}
+                            icon={<Banknote className='w-6 h-6' />}
+                            />
+
+                            </nav>
+                        )}
+
                         <Collapsible open={!isCollapsed}>
                         {/* Aqui dentro nós inserimos as categorias da sidebar */}
                             <CollapsibleContent>
