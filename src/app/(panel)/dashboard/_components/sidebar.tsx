@@ -64,7 +64,7 @@ export function SidebarDashboard({ children}: { children: React.ReactNode}) {
                         {/* Mostrar apenas quando a sidebar estiver colapsada */}
 
                         {isCollapsed && (
-                            <nav classNanme='flex flex-col gap-1 overflow-hidden mt-2'>
+                            <nav className='flex flex-col gap-1 overflow-hidden mt-2'>
                                                             <SidebarLink
                             href="/dashboard/services"
                             label="Serviços"
