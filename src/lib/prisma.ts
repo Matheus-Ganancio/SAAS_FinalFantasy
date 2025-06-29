@@ -1,4 +1,5 @@
 
+// O Prisma Client gerado está sendo salvo no diretório src/lib
 import { PrismaClient } from '@prisma/client';
 
 

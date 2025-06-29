@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -111,7 +110,8 @@ model User {
   phone                String? @default("")
   status               Boolean @default(true)
   timeZone             String? 
-  stripe_customer_id   String? 
+  stripe_customer_id   String?
+  times                String[] @default([])
 
   // Relacionamento com a assinatura, 1 assinatura para cada usuário
   subscription         Subscription?
