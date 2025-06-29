@@ -12,4 +12,174 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+
+}
+
+model Appointment {
+  id                String   @id @default(uuid())
+  // Nome do cliente
+  name              String
+  email             String
+  phone             String
+  // Data do agendamento
+  appointmentDate   DateTime
+  // horário do escolhido de agendamento
+  time             String
+
+  // ID do serviço agendado
+  serviceID String
+  service Service @relation(fields: [serviceID], references: [id])
+
+  // ID da clinica qual o agendamento foi feito
+  userID  String
+  user User @relation(fields: [userID], references: [id])
+
+  // Retorna a data que foi criada a assinatura
+  createdAt   DateTime @default(now())
+  // Retorna a data que foi atualizada a assinatura
+  updatedAt   DateTime @updatedAt
+}
+
+  model Reminder{
+    id         String   @id @default(uuid())
+    namdescriptione       String    
+
+    userID String
+    user User @relation(fields: [userID], references: [id])    
+
+    // Retorna a data que foi criada a assinatura
+    createdAt   DateTime @default(now())
+    // Retorna a data que foi atualizada a assinatura
+    updatedAt   DateTime @updatedAt
+
+  }
+
+  
+  model Service {
+    id         String   @id @default(uuid())
+    name       String
+    price      Int
+    duration   Int
+    status     Boolean @default(true)
+
+    userID String
+    user User @relation(fields: [userID], references: [id])
+
+    appointment Appointment[]
+
+    // Retorna a data que foi criada a assinatura
+    createdAt   DateTime @default(now())
+    // Retorna a data que foi atualizada a assinatura
+    updatedAt   DateTime @updatedAt
+  }
+
+
+
+// cria um enum para os planos de assinatura
+enum Plan {
+  BASIC
+  PROFESSIONAL
+}
+
+model Subscription {
+  id          String   @id @default(uuid())
+  status      String
+  plan        Plan
+  priceId     String
+
+  // Retorna a data que foi criada a assinatura
+  createdAt   DateTime @default(now())
+
+  // Retorna a data que foi atualizada a assinatura
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamento com o usuário, cada unica assinatura pertence a um usuário
+userId String @unique
+user User @relation(fields: [userId], references: [id])
+
+}
+
+// "?" faz o campo ser opcional, "@default("")" define um valor padrão pra string, 
+// no caso ela está definida como uma string vazia.
+model User {
+  id                   String          @id @default(cuid())
+  name                 String?
+  email                String          @unique
+  emailVerified        DateTime?
+  image                String?
+  address              String? @default("")
+  phone                String? @default("")
+  status               Boolean @default(true)
+  timeZone             String? 
+  stripe_customer_id   String? 
+
+  // Relacionamento com a assinatura, 1 assinatura para cada usuário
+  subscription         Subscription?
+
+  services Service[]
+  reminders Reminder[]
+  appointments Appointment[]
+
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([userId, credentialID])
 }
