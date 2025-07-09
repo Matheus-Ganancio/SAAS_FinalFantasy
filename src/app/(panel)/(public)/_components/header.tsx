@@ -19,16 +19,25 @@ import { Button } from "@/components/ui/button"
 // Importa o ícones da biblioteca Lucide React.
 import { Menu } from "lucide-react"
 import { LogIn } from "lucide-react"
+import { useSession } from "next-auth/react";
+// Importa a função handleRegister que será usada para lidar com o registro de usuários.
+// usar sempre o _ para declarar o local quando não é uma rota do Next.js
+import { handleRegister } from '../_actions/login'
 
 export function Header(){
+    // Sinaliza se existe usuário logado.
+    const { data: session, status } = useSession();
+    
     const [isOpen, setIsOpen] = useState(false);
     
-    // Sinaliza que não existe usuário logado.
-    const session = null;
-
     const navItems = [
         { href: "#profissionais", label: "Profissionais" }
     ]
+
+    async function handleLogin() {
+        await handleRegister("github")
+
+    }
 
     // Define o componente NavLinks.
     // Este componente é responsável por renderizar a lista de links de navegação.
@@ -75,15 +84,18 @@ export function Header(){
             ))}
             
             {/* confere se existe login ativo, caso não, renderiza o botão login na tela do painel*/}
-            {session ? (
+            {status === 'loading' ? (<>
+            </>
+            ) : session ? (
                 <Link
                 href="/dashboard"
-                className='flex items-center justify-center gap-2'
+                className='flex items-center justify-center gap-2 bg-zinc-900 text-white py-1 rounded-md px-4'
                 >
                 Painel da clinica
                 </Link>
             ) : (
-                <Button className="text-[#000000] hover:text-[#C6A94D] bg-[#C6A94D] hover:bg-[#000000]">
+                <Button onClick={handleLogin}  
+                className="text-[#000000] hover:text-[#C6A94D] bg-[#C6A94D] hover:bg-[#000000]">
                     <LogIn/>
                     Portal
                 </Button>
