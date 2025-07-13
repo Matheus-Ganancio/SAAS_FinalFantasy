@@ -5,15 +5,13 @@ import { redirect } from 'next/navigation';
 
 // ele precisa ser assincrono para poder aguardar a sessão do usuário
 export default async function Dashboard() {
-    const session = getSession();
+    const session = await getSession();
 
 
     // Caso o usuário não esteja logado, ele será redirecionado para a pagina abaixo
     if (!session) {
         redirect("/");
     }
-
-    if (!)
 
     return (
         <section>
